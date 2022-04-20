@@ -1,0 +1,63 @@
+{
+  "settings": {
+      "import/resolver": {
+          "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
+      }
+  },
+  "globals": {
+      "React": true,
+      "google": true,
+      "mount": true,
+      "mountWithRouter": true,
+      "shallow": true,
+      "shallowWithRouter": true,
+      "context": true,
+      "expect": true,
+      "jsdom": true,
+      "JSX": true
+  },
+  "env": {
+      "browser": true,
+      "es2021": true,
+      "jest": true
+  },
+  "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "airbnb"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+      "ecmaFeatures": {
+          "jsx": true
+      },
+      "ecmaVersion": 12,
+      "sourceType": "module"
+  },
+  "plugins": [
+      "react",
+      "@typescript-eslint"
+  ],
+  "rules": {
+      "dot-notation": "off",
+      "no-underscore-dangle": "off",
+      "no-unused-expressions": ["error", { "allowShortCircuit": true }],
+      
+      "arrow-body-style": "off",
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx", ".ts"] }],
+
+      "import/no-unresolved": "off",
+      "import/prefer-default-export": "off",
+      "import/extensions": ["error", { "tsx": "never", "ts": "never" }],
+
+      "react/function-component-definition": "off",
+
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": ["error"],
+      "react/require-default-props": [0, { "forbidDefaultForRequired": true, "ignoreFunctionalComponents": "true" }]
+  }
+}

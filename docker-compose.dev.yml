@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  db:
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile.dev
+    container_name: homebudget-db
+    environment:
+      POSTGRES_PASSWORD: "12345"
+    ports:
+      - "5432:5432"
+    networks:
+      - homebudget-net
+    volumes:
+      - homebudget-db:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    container_name: homebudget-backend
+    ports:
+      - "5000:5000"
+    networks:
+      - homebudget-net
+    volumes:
+      - ./server:/usr/src/app
+    env_file:
+      - ./config/dev.env
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    container_name: homebudget-client
+    networks:
+      - homebudget-net
+    volumes:
+      - ./client:/usr/src/app
+    env_file:
+      - ./config/dev.env
+    depends_on:
+      - backend
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+    container_name: homebudget-nginx
+    networks:
+      - homebudget-net
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+
+volumes:
+  homebudget-db:
+
+networks:
+  homebudget-net:
